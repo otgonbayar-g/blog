@@ -1,4 +1,4 @@
-import '@/styles/index.scss'
+import 'styles/index.scss'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function App({ Component, pageProps }) {
