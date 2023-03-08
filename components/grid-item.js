@@ -1,27 +1,34 @@
+import Link from "next/link";
 import { Card } from "react-bootstrap";
 
-export default () => {
+export default ({ post }) => {
     return (
         <Card className={`fj-card`}>
             <div className="card-body-wrapper">
                 <Card.Header className="d-flex flex-row">
-                    <img src={"https://source.unsplash.com/user/erondu/150x150"} className="rounded-circle mr-3" height="50px" width="50px" alt="avatar" />
+                    <img
+                        src={post.publisher.picture}
+                        className="rounded-circle mr-3"
+                        height="50px"
+                        width="50px"
+                        alt="avatar"
+                    />
                     <div>
                         <Card.Title className="font-weight-bold mb-1">
-                            Гантөмөр Отгонбаяр
+                            {post.publisher.title}
                         </Card.Title>
-                        <Card.Text className="card-date">2023 оны 3 сарын 8</Card.Text>
+                        <Card.Text className="card-date">{post.date}</Card.Text>
                     </div>
                 </Card.Header>
-                <div className="view overlay">
-                    <Card.Img src="https://source.unsplash.com/user/erondu/250x250" alt="Card image cap" />
-                </div>
-                <Card.Body>
-                    <Card.Title className="card-main-title">
-                        Sanity блог хийх
-                    </Card.Title>
-                    <Card.Text>Вэб технологи</Card.Text>
-                </Card.Body>
+                <Link href={`/${post.slug}`}>
+                    <div className="view overlay">
+                        <Card.Img src={post.image} alt="Card image cap" />
+                    </div>
+                    <Card.Body>
+                        <Card.Title className="card-main-title">{post.title}</Card.Title>
+                        <Card.Text>{post.subtitle}</Card.Text>
+                    </Card.Body>
+                </Link>
             </div>
         </Card>
     );
