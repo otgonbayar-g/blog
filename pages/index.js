@@ -1,52 +1,38 @@
-import { Container, Row, Col, Navbar, Nav, Media, Image, Card, NavbarBrand } from "react-bootstrap";
-import MyNavbar from "components/my-navbar";
-import Intro from "components/intro";
-import ListItem from 'components/list-item';
-import GridItem from 'components/grid-item';
+import { Row, Col } from "react-bootstrap";
+import useSWR from 'swr'
+
 import { getAllPosts } from "lib/api";
+import { usePosts } from "hooks/use-posts";
+
+import GridItem from "components/grid-item";
+import Layout from "components/layout";
+import Intro from "components/intro";
 
 export default function Home({ posts }) {
+  const { data, isError, isLoading } = usePosts();
+
+  if (isError) return <div>Алдаа гарлаа</div>;
+  if (!data) return <div>Ачаалж байна...</div>;
+
   return (
-    <Container>
-      <MyNavbar />
-      <div className="blog-detail-page">
-        <Row>
-          <Col md="12">
-            <Intro />
+    <Layout>
+      <Row>
+        <Col md="12">
+          <Intro />
+        </Col>
+      </Row>
+
+      <hr />
+
+      <pre>{JSON.stringify(data, null, 2)}</pre>
+      <Row className="mb-5">
+        {posts.map((post) => (
+          <Col md="4">
+            <GridItem post={post} />
           </Col>
-        </Row>
-
-        <pre>
-          {JSON.stringify(posts, null, 2)}
-        </pre>
-
-        <hr />
-
-        <div className={`page-wrapper`}>
-          <Row className="mb-5">
-            {/*<Col md="10">
-              <ListItem />
-            </Col>*/}
-
-            {posts.map((post) => (
-              <Col md="4">
-                <GridItem post={post} />
-              </Col>
-            ))}
-
-          </Row>
-        </div>
-      </div>
-      <footer className="page-footer">
-        <div>
-          <a href="#">нүүр</a>
-          {" | "}
-          <a href="#">сургалт</a>
-          {" | "}
-          <a href="#">фэйсбүүк</a>
-        </div>
-      </footer>
-    </Container>
+        ))}
+      </Row>
+    </Layout>
   );
 }
 

@@ -9,12 +9,17 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@portabletext/react": "^2.0.2",
+    "@sanity/block-content-to-react": "^3.0.0",
     "@sanity/client": "^5.2.2",
+    "@sanity/image-url": "^1.0.2",
     "bootstrap": "^5.2.3",
+    "moment": "^2.29.4",
     "next": "13.2.3",
     "react": "18.2.0",
     "react-bootstrap": "^2.7.2",
     "react-dom": "18.2.0",
-    "sass": "^1.58.3"
+    "sass": "^1.58.3",
+    "swr": "^2.1.0"
   }
 }
